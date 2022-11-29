@@ -15,6 +15,8 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -24,8 +26,9 @@
             <div class="row justify-content-center my-4">
                 <div class="col-7">
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="todo in todoList">
-                            <span :class="{'active' : (todo.done)}">{{ todo.text }}</span>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(todo, index) in todoList">
+                            <span @click="changeDone(index)" :class="{'active' : (todo.done)}">{{ todo.text }}</span>
+                            <i @click="removeTodo(index)" class="fa-solid fa-trash-can"></i>
                         </li>
                     </ul>
                 </div>

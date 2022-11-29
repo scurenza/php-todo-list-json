@@ -7,3 +7,12 @@
 .active {
     text-decoration: line-through;
 }
+
+li > span {
+    cursor: pointer;
+}
+
+i {
+    color: red;
+    cursor: pointer;
+}
