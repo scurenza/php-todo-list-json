@@ -26,25 +26,46 @@ createApp({
                 this.newTodo = "";
             })
         },
-        changeDone(index) {
-            const clickedTodo = this.todoList[index];
+        // changeDone(index) {
+        //     const clickedTodo = this.todoList[index];
 
-            axios.post("server.php", clickedTodo, {
+        //     axios.post("server.php", clickedTodo, {
+        //         headers: { "Content-Type": "multipart/form-data" }
+        //     })
+        //     .then((resp) => {
+        //         clickedTodo.done = !clickedTodo.done;
+        //         console.log(clickedTodo.done);
+        //         console.log(resp.data[index]);
+                
+        //     })
+        // },
+        changeDone(index) {
+            const data = {
+                clickedTodo: index
+            }
+
+            axios.post("server.php", data, {
                 headers: { "Content-Type": "multipart/form-data" }
             })
             .then((resp) => {
-                clickedTodo.done = !clickedTodo.done;
-                
+                this.todoList = resp.data;
             })
         },
         removeTodo(index) {
-            const cancelTodo = this.todoList[index];
+            // const data = {
+            //     cancelTodo: index
+            // }
 
-            axios.post("server.php", cancelTodo, {
-                headers: { "Content-Type": "multipart/form-data" }
-            })
-            .then((resp) => {
-                this.todoList.splice(index, 1);
+            // axios.post("server.php", data, {
+            //     headers: { "Content-Type": "multipart/form-data" }
+            // })
+            // .then((resp) => {
+            //     this.todoList = resp.data;
+            // })
+            const data = new FormData();
+            data.append("cancelTodo", index);
+            axios.post("server.php", data).then((resp) => {
+                this.todoList = resp.data;
             })
         }
     }

@@ -43,9 +43,20 @@ if (isset($_POST["newTodo"])) {
 
     //Scrivo il dato nel file
     file_put_contents("todo.json", json_encode($todos));
+} elseif (isset($_POST["clickedTodo"])) {
+
+    $index = $_POST["clickedTodo"];
+    $todos[$index]["done"] = !$todos[$index]["done"];
+
+    file_put_contents("todo.json", json_encode($todos));
+} elseif (isset($_POST["cancelTodo"])) {
+
+    $index = $_POST["cancelTodo"];
+    array_splice($todos, $index, 1);
+
+
+    file_put_contents("todo.json", json_encode($todos));
 }
-
-
 
 // Parte di invio dei dati
 header("Content-Type: application/json");
